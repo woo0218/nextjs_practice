@@ -1,9 +1,11 @@
-export default function PostList() {
+'use client'
+import { useState } from 'react'
+
+export default function PostDetail() {
+    useState([])
     return (
-        <ul>
-            <li>게시글 1</li>
-            <li>게시글 2</li>
-            <li>게시글 3</li>
-        </ul>
+        <>
+            <h1>게시글 상세</h1>
+        </>
     )
 }
