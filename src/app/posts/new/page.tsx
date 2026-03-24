@@ -14,13 +14,15 @@ export default function NewPost() {
         e.preventDefault()
         setLoading(true)
 
-        const { error } = await supabase.from('posts').insert({ title, content })
+        const { data, error } = await supabase.from('posts').insert([{ title, content }]).select()
 
         setLoading(false)
 
         if (error) {
             console.error(error)
             alert('글 등록에 실패했습니다.')
+        } else if (!data || data.length === 0) {
+            alert('권한이 없습니다.')
         } else {
             router.push('/posts')
         }
