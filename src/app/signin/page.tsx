@@ -2,17 +2,20 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 
-export default function SignUp() {
+export default function SignIn() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const handleOnSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const { error } = await supabase.auth.signUp({ email, password })
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        })
         if (error) {
             console.log(error)
         } else {
-            alert('회원가입 성공!')
+            alert('로그인 성공!')
         }
     }
 
@@ -32,7 +35,7 @@ export default function SignUp() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit">회원가입</button>
+            <button type="submit">로그인</button>
         </form>
     )
 }
